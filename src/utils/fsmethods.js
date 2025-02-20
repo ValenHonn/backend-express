@@ -1,6 +1,12 @@
-const fs = require('fs').promises
+import fs from 'fs/promises'
 
-const archivo = 'products.json'
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const archivo = path.join(__dirname, '../data/products.json');
 
 //leer productos
 const leerProductos = async () => {
@@ -22,5 +28,4 @@ const escribirProductos = async (productos) => {
     }
 }
 
-
-module.exports = { leerProductos, escribirProductos };
+export default { leerProductos, escribirProductos };

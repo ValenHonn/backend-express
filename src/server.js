@@ -1,5 +1,5 @@
-const express = require('express') //guardo el modulo express en la variable express
-const productsRouter = require('./routes/products') //importamos el objeto router
+import express from 'express' //guardo el modulo express en la variable express
+import productsRouter from './routes/productsRoutes.js' //importamos el objeto router
 
 
 const app = express() //ejecuto la funcion express y guardo el objeto resultante de la funcion en la variable app, que es un servidor que me permite manejar solicitudes y mas
