@@ -1,12 +1,14 @@
 import express from 'express' //guardo el modulo express en la variable express
 import productsRouter from './routes/productsRoutes.js' //importamos el objeto router
-
+//import sequelize from './config/database.js'
 
 const app = express() //ejecuto la funcion express y guardo el objeto resultante de la funcion en la variable app, que es un servidor que me permite manejar solicitudes y mas
 
 //middlewares
 app.use(express.json())//por defecto express no sabe leer datos en formato json, esto lo corrige
 app.use(productsRouter)
+
+
  
 app.get('/', (req, res) => { //una vez que el server app recibe una solicitud get en la ruta principal, ejecuta un callback con parametros req y res, req contiene toda la data del request y res esta vacio, pero sirve para enviar la respuesta al front
     res.send('Hello World')

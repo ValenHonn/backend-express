@@ -1,10 +1,11 @@
-import methods from '../utils/fsmethods.js'
+import methods from "../utils/fsmethods.js"
+import Producto from "../models/productsModel.js";
 
 class ProductService {
 
     async getProducts() {  
 
-        return await methods.leerProductos(); //aunque leerProductos ya involucra una operacion asincrona dentro de ella, es necesario volver a definir una operacion asincrona aca, ya que si no espeamos a que termine de leer el archivo, vamos a devolver un json vacio
+        return await Producto.findAll(); //aunque leerProductos ya involucra una operacion asincrona dentro de ella, es necesario volver a definir una operacion asincrona aca, ya que si no espeamos a que termine de leer el archivo, vamos a devolver un json vacio
 
     }
 
