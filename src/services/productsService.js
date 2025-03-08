@@ -1,55 +1,85 @@
-import methods from "../utils/fsmethods.js"
 import Producto from "../models/productsModel.js";
 
 class ProductService {
 
     async getProducts() {  
+        try {
 
-        return await Producto.findAll(); //aunque leerProductos ya involucra una operacion asincrona dentro de ella, es necesario volver a definir una operacion asincrona aca, ya que si no espeamos a que termine de leer el archivo, vamos a devolver un json vacio
+            return await Producto.findAll(); 
+            
+        } catch(error) {
 
+            throw new Error("Error al obtener los productos de la base de datos");
+
+        }
     }
 
     async getProductById(id) {
+        try {
 
-        const productos = await methods.leerProductos();
-        return productos.find(p => p.id === id) || null;
+            return await Producto.findByPk(id);
 
+        } catch(error) {
+
+            throw new Error("Error al obtener el producto de la base de datos");
+
+        }
     }
 
     async createProduct(nuevoProducto) {
 
-        const productos = await methods.leerProductos(); //productos es un array de objetos de javascript
-        nuevoProducto.id = productos.length > 0 ? productos[productos.length - 1].id + 1 : 1;
-            
-        productos.push(nuevoProducto); //insertamos al arreglo el nuevo producto
-        await methods.escribirProductos(productos); //sobreescribimos el archivo
-        return nuevoProducto
+        try{
+
+            return await Producto.create(nuevoProducto) 
+
+        } catch(error){
+
+            throw new Error("Error al crear el producto en la base de datos");
+
+        }
 
     }
 
     async updateProduct(id, reqbody) {
 
-        const productos = await methods.leerProductos();
-        const index = productos.findIndex(p => p.id === id) || null;
+        try {
 
-        productos[index] = { id, ...reqbody }; 
-        await methods.escribirProductos(productos);
-        return productos[index];
+            const producto = await Producto.findByPk(id)
+            if (!producto) {
+                return null; 
+            }
+
+            await producto.update(reqbody)
+            return producto.id
+            
+
+        } catch(error){
+
+            throw new Error("Error al actualizar el producto de la base de datos");
+
+        }
 
     }
 
     async deleteProduct(id) {
 
-        const productos = await methods.leerProductos();
-        const productosFiltrados = productos.filter(p => p.id !== id);
-    
-        if (productos.length === productosFiltrados.length) {
-            return null;
-        }
-    
-        await methods.escribirProductos(productosFiltrados);
-        return id;
-    }
+       try {
+
+            const producto = await Producto.findByPk(id) // me devuelve una instancia de la clase Producto, la cual hace referencia a la tabla products
+            if (!producto) {
+                return null; 
+            }
+
+            await producto.destroy()
+            return producto.id
+
+       } catch(error) {
+
+        throw new Error("Error al eliminar el producto de la base de datos");
+
+       }
+
+}
 
 }
 

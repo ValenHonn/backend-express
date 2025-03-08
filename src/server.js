@@ -9,7 +9,6 @@ app.use(express.json())//por defecto express no sabe leer datos en formato json,
 app.use(productsRouter)
 
 
- 
 app.get('/', (req, res) => { //una vez que el server app recibe una solicitud get en la ruta principal, ejecuta un callback con parametros req y res, req contiene toda la data del request y res esta vacio, pero sirve para enviar la respuesta al front
     res.send('Hello World')
 })
