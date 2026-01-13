@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize'; //para poder definir los tipos de datos d
 import sequelize from '../../config/database.js'; 
 
 //Un modelo en Sequelize es un objeto de JavaScript que representa una tabla en la base de datos, El modelo permite interactuar con la tabla desde el código.
-const Producto = sequelize.define('products', { //Sequelize necesita conocer la estructura para validar y mapear los datos correctamente, por eso 
+const Producto = sequelize.define('products', { //Sequelize necesita conocer la estructura para validar y mapear los datos correctamente
     id: {
         type: DataTypes.INTEGER, //necesitamos la estructura del modelo para que sequelize pueda construir la consulta SQL correspondiente.
         primaryKey: true,

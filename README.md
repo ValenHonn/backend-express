@@ -12,6 +12,7 @@ Hace uso de los metodos REST.
 3- Controllers
 Reciben la solicitud http y llama al servicio encargado de manejar la solicitud, es decir, llama al servicio para que realice la logica de negocio necesaria.
 Son los encargados de darle una respuesta al cliente con los datos correspondientes.
+Son los encargados de definir los handlers.
 
 4- Services
 Contiene la logica de negocio de la aplicacion.

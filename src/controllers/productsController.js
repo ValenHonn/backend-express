@@ -1,14 +1,16 @@
 import ProductService from "../services/productsService.js";
 
+// En la capa service tenemos una clase del dominio (ProductService) con todos los metodos http sobre esta clase
+// Aca creamos una instancia de esa clase que pueda acceder a los metodos de ella 
 const productService = new ProductService()
 
-const getProducts = async (req, res) => { 
+const getProducts = async (req, res) => { //definimos el handler (funcion que maneja las peticiones), el cual es asincronico porque va a esperar datos
 
     try { //El bloque try intenta ejecutar el código dentro de él.
-        const productos = await productService.getProducts() // await espera a que la promesa que le retorna getProducts() pase de pending a fulfilled, entonces ahi recien sigue con la ejecucion de la funcion.
+        const productos = await productService.getProducts() // await espera a que la promesa que le retorna getProducts() pase de pending a fulfilled, entonces ahi recien sigue con la ejecucion de la funcion (basicamente espera a que el service termine).
         res.status(200).json(productos);
     }
-    catch(error) { //Si ocurre un error, se detiene la ejecución y se pasa al bloque catch, que captura el error y permite manejarlo.
+    catch(error) { //Si ocurre un error en try, se detiene la ejecución y se pasa al bloque catch, que captura el error y permite manejarlo.
         res.status(500).json({ error: 'Error al obtener los productos', error });
     }
 
@@ -17,7 +19,7 @@ const getProducts = async (req, res) => {
 const getProductById = async (req, res) => {
 
     try {
-        const id = parseInt(req.params.id); //saco el id de la request
+        const id = parseInt(req.params.id); //saco el id de la request y lo convierto en entero
         const producto = await productService.getProductById(id) //llamo al servicio correspondiente
 
         if (!producto) {

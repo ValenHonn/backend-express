@@ -1,11 +1,11 @@
 import Producto from "../models/productsModel.js";
 
-class ProductService {
+class ProductService { //cada elemento del dominio se va a dividir en clases, el cual tendra los metodos http para manipularlo
 
     async getProducts() {  
         try {
 
-            return await Producto.findAll(); 
+            return await Producto.findAll(); //await porque estoy llamando a la funcion, no pasar la funcion como dato que alguien más la ejecutará después, como en routes
             
         } catch(error) {
 
