@@ -4,7 +4,7 @@ import productsController from '../controllers/productsController.js' //importam
 //el metodo router me permite definir rutas de forma modular en mi proyecto
 // express.Router() crea un objeto router que tiene las mismas funciones que app, y sirve para poder definir los endpoints, para despues llamar...
 // ...al controlador encargado de ese endpoint
-const router = express.Router()
+const router = express.Router() //o import {Router} from 'express';
 
 router.get('/products', productsController.getProducts) //metodo: get, ruta: /products, handler: getProducts
 //el handler es una función que maneja una request HTTP, recibe la request (req), decide qué hacer con ella, y devuelve una response (res), por...
